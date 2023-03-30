@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.rps-ui {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+    gap: 150px;
+}
+
+.button {
+    width: 400px;
+    height: 400px;
+    border: 2px black solid;
+    border-radius: 5px;
+}
+
+.button:hover {
+    transform: scale(1.01);
+}
+
+#btn-rock,
+#btn-paper,
+#btn-scissors {
+    text-align: center;
+    font-size: 50px;
+}
+
+.div-result-text {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.div-reset {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#btn-reset{
+    height: 50px;
+    width: 100px;
+}
+
+.div-score {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+#score {
+    font-size: 50px;
+}

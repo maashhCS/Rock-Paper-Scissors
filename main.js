@@ -2,17 +2,7 @@
 let computerScore = 0;
 let playerScore = 0;
 let roundScore = 0;
-
-function getPlayerChoice(){
-    while(true){
-    let playerChoice = prompt('Choose a move').toLowerCase();
-        if(playerChoice === 'rock' || playerChoice === 'paper' || playerChoice === 'scissors' ) {
-            return playerChoice;
-        } else {
-            console.log('You entered a wrong move. Try again!');
-        }
-    }
-}
+let winner = "";
 
 function getComputerChoice(){
     let randomNumber = Math.floor(Math.random() * (3 - 1 + 1) + 1);
@@ -26,11 +16,13 @@ function getComputerChoice(){
 }
 
 function checkWinner(){
-    if(playerScore > computerScore){
-        console.log(`You win ${playerScore} to ${computerScore}. Congratulations!`);
-    } else if(computerScore > playerScore){
-        console.log(`You lose ${playerScore} to ${computerScore}. Unlucky`);
-    }
+    if(playerScore > 4 || computerScore > 4){
+        if(playerScore > computerScore){
+            winner = `You win ${playerScore} to ${computerScore}. Congratulations!`;
+        } else{
+            winner =  `You lose ${playerScore} to ${computerScore}. Unlucky`;
+        }
+    };
 }
 
 function playRound(computerChoice, playerChoice){
@@ -58,15 +50,35 @@ function playRound(computerChoice, playerChoice){
     } 
 }
 
-function game(){
-    let computerChoice;
-    let playerChoice;
-    for(roundScore; roundScore < 5; roundScore++){
-        computerChoice = getComputerChoice();
-        playerChoice = getPlayerChoice();
-        console.log(playRound(computerChoice, playerChoice));
+function game(playerChoice){
+    if(playerScore === 5 || computerScore === 5){
+
+        return;
+    }else {
+        let computerChoice = getComputerChoice();
+        document.getElementById("result").innerHTML = playRound(computerChoice, playerChoice);
+        checkWinner();
+        document.getElementById("winner").innerHTML = winner;
+        document.getElementById("score").innerHTML = `${playerScore} : ${computerScore}`;
     }
-    checkWinner();
 }
 
-game();
+function reset(){
+    roundScore = 0;
+    playerScore = 0;
+    computerScore = 0;
+    winner = "";
+    document.getElementById("score").innerHTML = `${playerScore} : ${computerScore}`;
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("winner").innerHTML = "";
+}
+
+const buttons = document.querySelectorAll('.button');
+buttons.forEach(button =>{
+    button.addEventListener('click', function() {
+        game(button.value);
+    });
+});
+
+const buttonReset = document.querySelector('#btn-reset');
+buttonReset.addEventListener('click', reset);
